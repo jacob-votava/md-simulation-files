@@ -4,7 +4,7 @@ Simulation inputs, restart files, force field optimization data, and analysis sc
 
 ## Contents
 
-- **`simulation_preparation/`** -- `.mdp` templates, Slurm helpers, parameterization scripts, and OpenFF force field files used to initialize GROMACS simulations.
+- **`simulation_preparation/`** -- `.mdp` templates, Slurm helpers, parameterization scripts, and OpenFF force field files used to initialize GROMACS simulations. If you want to use the optimized forcefield parameters, check out the .offxml files.
 - **`simulations_restart_files/`** -- Restart snapshots (`trem_last_run.{tpr,gro}`) and topologies for every temperature-replica-exchange simulation (monomer and dimer phase behavior).
 - **`ff_optimization/`** -- OpenFF BespokeFit torsion-drive scan results (B3LYP-D3BJ/DZVP), input SDF files, and QM/MM comparison plots for reproducing the DFT calculations.
 - **`sample_analysis/`** -- Analysis scripts used to generate the figures in the paper and supporting information (see below).
@@ -42,20 +42,8 @@ Each script is a self-contained Python file that reads raw simulation output and
 
 Set the following environment variables to point to your data, then run any script with `uv run`:
 
-```bash
-export SIMULATION_ROOT="/path/to/simulation/root"          # GROMACS trajectories (see layout above)
-export DATA_ROOT="/path/to/working/directory"               # working dir for cached intermediate results
-export QM_DATA_ROOT="/path/to/openff/qm/data"              # OpenFF QM torsion-scan data
-export FRAGMENT_RG_DATA_ROOT="/path/to/fragment/rg/cache"   # working dir for fragment Rg cache
+A Slurm script (`remake_figures.slurm`) is also provided to run all 15 scripts sequentially — edit the path variables at the top of the file and submit with `sbatch remake_figures.slurm`. For this to work you will need to re-run the simulation files, use the restart. Each script is self-contained and can be run independently. Output figures are written to `polished_figures/` and `supp_info/`.
 
-uv run python polished_figures/monomer_phase_diagram.py
-uv run python supp_info/all_phi_hists_300K.py
-# etc.
-```
-
-Each script is self-contained and can be run independently. Output figures are written to `polished_figures/` and `supp_info/`.
-
-A convenience Slurm script (`remake_figures.slurm`) is also provided to run all 15 scripts sequentially — edit the path variables at the top of the file and submit with `sbatch remake_figures.slurm`.
 
 ### Main figures (`polished_figures/`)
 
