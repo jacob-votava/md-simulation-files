@@ -6,7 +6,7 @@ Simulation inputs, restart files, force field optimization data, and analysis sc
 
 - **`simulation_preparation/`** -- `.mdp` templates, Slurm helpers, parameterization scripts, and OpenFF force field files used to initialize GROMACS simulations. If you want to use the optimized forcefield parameters, check out the .offxml files.
 - **`simulations_restart_files/`** -- Restart snapshots (`trem_last_run.{tpr,gro}`) and topologies for every temperature-replica-exchange simulation (monomer and dimer phase behavior).
-- **`ff_optimization/`** -- OpenFF BespokeFit torsion-drive scan results (B3LYP-D3BJ/DZVP), input SDF files, and QM/MM comparison plots for reproducing the DFT calculations.
+- **`ff_optimization/`** -- OpenFF BespokeFit torsion-drive scan results (B3LYP-D3BJ/DZVP), input SDF files, QM/MM comparison plots for reproducing the DFT calculations, and full scan geometries/energies in `fragment_scans_multixyzs/` (scan angles: -165 to 180 degrees in 15 degree steps).
 - **`sample_analysis/`** -- Analysis scripts used to generate the figures in the paper and supporting information (see below).
 
 ## Analysis Scripts (`sample_analysis/`)
